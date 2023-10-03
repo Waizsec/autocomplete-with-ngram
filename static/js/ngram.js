@@ -21,7 +21,7 @@ function updateSuggestions() {
                 suggestionSpan.addEventListener('click', () => {
                     const inputElement = document.getElementById('input_text');
                     const suggestionToAdd = suggestion;
-                    const noSpaceWords = ["'s", "'t", "am"];
+                    const noSpaceWords = ["'s", "'t"];
 
                     if (suggestionToAdd.match(/^[.,!?';]/) || noSpaceWords.includes(suggestionToAdd)) {
                         inputElement.value += suggestionToAdd;
