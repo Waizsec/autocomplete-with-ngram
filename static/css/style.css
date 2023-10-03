@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;700&display=swap');
+
+body {
+    background-color: #0F1110;
+    font-family: 'Gothic A1', sans-serif;
+    font-family: 'Graduate', serif;
+}
+
+.custom-headline span,
+.text-custome {
+    color: #8C57F2;
+}
+
+.custom-font {
+    color: white;
+}
+
+.custom-font::placeholder {
+    color: rgb(206, 206, 206);
+}
+
+.bg-custom {
+    background-color: #6D30E2;
+}

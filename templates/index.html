@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project NLP - Kelompok 12</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{  url_for('static', filename='assets/kel.svg') }}" type="image/x-icon">
+</head>
+
+<body class="px-40">
+    <div class="w-full h-screen flex justify-center flex-col mt-10">
+        <h1 class="text-4xl text-white custom-headline"><span>N-Gram</span> Algorithm</h1>
+        <input type="text" name="input_text" placeholder="Type Here..."
+            class="bg-transparent mt-14 text-white custom-font w-3/6 py-2 focus:outline-none font-normal border-l pl-4"
+            id="input_text">
+        <p class="mt-2 text-white mb-14 mt-6">Suggestions: <span id="suggestions" class="text-custome"></span></p>
+
+        <p class="text-white w-3/6">
+            <span class="text-custome"> About N-Gram : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed vehicula
+            efficiturdiam, sit
+            amet eleifend nulla ultrices eget. Nulla facilisi. Sed sodales, ligula eu auctor congue, sapien quam luctus
+            mi, eget
+            tincidunt ligula lorem at dolor. Nunc posuere elit eget justo laoreet, sed scelerisque tortor vulputate.
+            Vivamus ut volutpat erat. Suspendisse potenti. Nullam vel vehicula nulla. Duis lacinia ligula ac ipsum
+            efficitur, vel aliquet nisi euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Integer semper, mi eu malesuada ullamcorper, massa arcu venenatis mi, vel volutpat
+            ex justo eu nulla. Proin nec sapien sit amet ligula lacinia varius. Sed lacinia venenatis urna, sit amet
+            sollicitudin dui dictum id. Vestibulum euismod justo sed sapien tincidunt, in bibendum ligula ultrices.
+
+        </p>
+    </div>
+    <img src="{{  url_for('static', filename='assets/kel.svg') }}" alt="" class="fixed w-16 right-6 top-4">
+
+    <script src="{{ url_for('static', filename='js/ngram.js') }}"></script>
+</body>
+
+</html>
