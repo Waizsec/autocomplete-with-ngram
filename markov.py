@@ -1,21 +1,8 @@
-import random
 import pandas as pd
 import nltk
 from nltk.tokenize import word_tokenize
-from collections import defaultdict
-nltk.data.path.append("punkt/PY3/english.pickle")
-
-file_path = "static/cleaned_text.txt"
-text = ""
-try:
-    with open(file_path, "r") as file:
-        text = file.read()
-        print("File contents imported successfully.")
-except FileNotFoundError:
-    print("File not found. Please check the file path.")
-
-tokens = word_tokenize(text)
-tokens = [token for token in tokens if token not in ["'", '[', ']', '``']]
+from preprop import tokens
+import random
 
 # Markov Model
 def build_markov_model(tokens, order=1):
@@ -33,7 +20,7 @@ def build_markov_model(tokens, order=1):
 
 # Membuat autocomplete suggestion
 def autocomplete(input_text, model, max_suggestions=5):
-    input_words = input_text.split()
+    input_words = word_tokenize(input_text.lower())
     
     # Menentukan urutan yang benar berdasarkan number input kata
     order = 1 if len(input_words) == 1 else 2  # Gunakan 1 order (context) dan 2 jika lebih dari satu kata
