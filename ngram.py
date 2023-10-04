@@ -4,16 +4,15 @@ from nltk.tokenize import word_tokenize
 from collections import defaultdict
 nltk.data.path.append("punkt/PY3/english.pickle")
 
-file_path = 'static/train.csv'
-data = pd.read_csv(file_path)
-text_list = data['dialog'].tolist()
+file_path = "static/cleaned_text.txt"
+text = ""
+try:
+    with open(file_path, "r") as file:
+        text = file.read()
+        print("File contents imported successfully.")
+except FileNotFoundError:
+    print("File not found. Please check the file path.")
 
-text = ''
-for item in text_list:
-    if isinstance(item, str):
-        text += ' ' + item
-
-cleaned_text = text.replace('[\'', '').replace('\']', '').replace('"', '').replace('\n', '').strip()
 tokens = word_tokenize(text)
 tokens = [token for token in tokens if token not in ["'", '[', ']', '``']]
 vocab = set(tokens)
