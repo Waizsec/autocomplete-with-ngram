@@ -6,6 +6,32 @@ body {
     font-family: 'Graduate', serif;
 }
 
+.text-hover {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.text-hover::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    width: 0;
+    bottom: -1vw;
+    left: 0;
+    background-color: #8C57F2;
+    transition: width 0.2s ease-in-out;
+}
+
+.text-hover:hover::before {
+    width: 50%;
+}
+
+.text-hover:hover {
+    transform: translateY(0);
+}
+
 .custom-headline span,
 .text-custome {
     color: #8C57F2;
