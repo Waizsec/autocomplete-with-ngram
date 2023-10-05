@@ -5,12 +5,10 @@ from collections import defaultdict, Counter
 from preprop import tokens
 import string
 
-# Preprocess tokens
 vocab = set(tokens)
 bigram_text = [(tokens[i], tokens[i+1]) for i in range(len(tokens) - 1)]
 trigram_text = [(tokens[i], tokens[i+1], tokens[i+2]) for i in range(len(tokens) - 2)]
 
-# Count unigrams, bigrams, and trigrams
 unigram_counts = Counter(tokens)
 
 def count_ngrams(tokens):
