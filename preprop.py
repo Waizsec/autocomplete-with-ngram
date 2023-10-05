@@ -7,7 +7,7 @@ nltk.data.path.append("punkt/PY3/english.pickle")
 file_path = "static/cleaned_text.txt"
 text = ""
 try:
-    with open(file_path, "r") as file:
+   with open(file_path, "r", encoding='utf-8') as file:
         text = file.read()
         print("File contents imported successfully.")
 except FileNotFoundError:
