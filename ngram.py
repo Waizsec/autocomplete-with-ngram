@@ -1,45 +1,21 @@
 import pandas as pd
 import nltk
 from nltk.tokenize import word_tokenize
-from collections import defaultdict
+from collections import defaultdict, Counter
 from preprop import tokens
+import string
 
+# Preprocess tokens
 vocab = set(tokens)
-vocab_list = list(vocab)
+bigram_text = [(tokens[i], tokens[i+1]) for i in range(len(tokens) - 1)]
+trigram_text = [(tokens[i], tokens[i+1], tokens[i+2]) for i in range(len(tokens) - 2)]
 
-bigram_text = []
-trigram_text = []
-
-for i in range(len(tokens)-2):
-  bigram = []
-  bigram.append(tokens[i])
-  bigram.append(tokens[i+1])
-  bigram_text.append(bigram)
-
-for i in range(len(tokens)-3):
-  trigram = []
-  trigram.append(tokens[i])
-  trigram.append(tokens[i+1])
-  trigram.append(tokens[i+2])
-  trigram_text.append(trigram)
-
-
-unigram_counts = defaultdict(int)
-for token in tokens:
-    unigram_counts[token] += 1
+# Count unigrams, bigrams, and trigrams
+unigram_counts = Counter(tokens)
 
 def count_ngrams(tokens):
-    bigram_counts = defaultdict(int)
-    trigram_counts = defaultdict(int)
-
-    for i in range(len(tokens) - 1):
-        bigram = (tokens[i], tokens[i+1])
-        bigram_counts[bigram] += 1
-
-    for i in range(len(tokens) - 2):
-        trigram = (tokens[i], tokens[i+1], tokens[i+2])
-        trigram_counts[trigram] += 1
-
+    bigram_counts = Counter([(tokens[i], tokens[i+1]) for i in range(len(tokens) - 1)])
+    trigram_counts = Counter([(tokens[i], tokens[i+1], tokens[i+2]) for i in range(len(tokens) - 2)])
     return bigram_counts, trigram_counts
 
 bigram_counts, trigram_counts = count_ngrams(tokens)
@@ -49,8 +25,12 @@ def suggest_next_word(input, bigram_counts, trigram_counts, unigram_counts, voca
     last_bigram = tuple(tokenized_input[-2:])
     vocab_probabilities = {}
 
-    if input is None or not input.strip():
-        return []
+    if not input.strip():
+        unigram_counter = Counter(unigram_counts)
+        punctuation_chars = set(string.punctuation)
+        top_3_most_frequent = [(word, frequency) for word, frequency in unigram_counter.most_common() if word not in punctuation_chars][:3]
+        return top_3_most_frequent 
+
     elif len(tokenized_input) == 1:
         if last_bigram:
             last_unigram = last_bigram[0]

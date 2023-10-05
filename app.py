@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from ngram import suggest_next_word, bigram_counts, trigram_counts, unigram_counts, vocab
-from markov import autocomplete, model
+from markov import autocomplete, two_word_model, one_word_model
 
 
 app = Flask(__name__)
@@ -27,7 +27,14 @@ def get_suggestions():
 @app.route('/get_suggestions_markov', methods=['POST'])
 def get_suggestions_markov():
     input_text = request.form['input_text']
-    suggestions = autocomplete(input_text, model, max_suggestions=3)
+    input_text = request.form['input_text']
+    words = input_text.split()
+
+    if len(words) == 1 :
+        suggestions = autocomplete(input_text, one_word_model, max_suggestions=3)
+    else:
+         suggestions = autocomplete(input_text, two_word_model, max_suggestions=3)
+         
     return jsonify({'suggestions': [suggestions]})
 
 if __name__ == "__main__" :
